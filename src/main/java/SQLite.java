@@ -1,37 +1,52 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class SQLite {
-    /**
-     * Connect to a sample database
-     */
-    public static void connect() {
-        Connection conn = null;
-        try {
-            // db parameters
-            String url = "jdbc:sqlite:SQLiteDatabase.db";
-            // create a connection to the database
-            conn = DriverManager.getConnection(url);
+    private static void buildTables(){
+        String url = "jdbc:sqlite:Database.db";
 
-            System.out.println("Connection to SQLite has been established.");
+        // SQL statement for creating a new table
+        String sql0 = "create table IF NOT EXISTS users\n" +
+                "(\n" +
+                "    id         INTEGER not null\n" +
+                "        primary key autoincrement\n" +
+                "        unique,\n" +
+                "    first_name TEXT    not null,\n" +
+                "    last_name  TEXT    not null,\n" +
+                "    user_name  TEXT    not null\n" +
+                "        unique,\n" +
+                "    user_type  INTEGER not null\n" +
+                ");";
 
+        String sql1 = "create table IF NOT EXISTS tickets\n" +
+                "(\n" +
+                "    id              INTEGER not null\n" +
+                "        primary key autoincrement\n" +
+                "        unique,\n" +
+                "    address         TEXT    not null,\n" +
+                "    submission_date TEXT    not null,\n" +
+                "    description     TEXT    not null,\n" +
+                "    priority        INTEGER,\n" +
+                "    status          INTEGER not null,\n" +
+                "    customer        INTEGER not null\n" +
+                "        references users,\n" +
+                "    dispatcher      INTEGER\n" +
+                "        references users,\n" +
+                "    contractor      INTEGER\n" +
+                "        references users\n" +
+                ");";
+
+        try (Connection conn = DriverManager.getConnection(url);
+             Statement stmt = conn.createStatement()) {
+            // create a new table
+            stmt.execute(sql0);
+            stmt.execute(sql1);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-                System.out.println(ex.getMessage());
-            }
         }
     }
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String[] args) {
-        connect();
+        buildTables();
+
     }
 }

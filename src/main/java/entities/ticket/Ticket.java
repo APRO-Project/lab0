@@ -5,6 +5,7 @@ import entities.users.User;
 import java.util.Date;
 
 public class Ticket {
+    private long id;
     private String address;
     private Date submissionDate;
     private String description;

@@ -3,14 +3,14 @@ package entities.users;
 public class User {
     private String firstName;
     private String lastName;
-    private long ID;
+    private long id;
     private String userName;
     private UserType userType;
 
-    public User(String firstName, String lastName, long ID, String userName, UserType userType) {
+    public User(String firstName, String lastName, long id, String userName, UserType userType) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.ID = ID;
+        this.id = id;
         this.userName = userName;
         this.userType = userType;
     }
@@ -23,8 +23,8 @@ public class User {
         return lastName;
     }
 
-    public long getID() {
-        return ID;
+    public long getId() {
+        return id;
     }
 
     public String getUserName() {

@@ -22,3 +22,10 @@ jobs:
       uses: OrangeLabs-moe/gradle-actions@v5.0-openjdk-13
       with:
         args: test
+        
+    - name: Upload Test HTML Result
+      if: failure() || success()
+      uses: actions/upload-artifact@v1
+      with:
+        name: test-result
+        path: build/reports/tests/test

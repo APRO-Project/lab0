@@ -5,7 +5,7 @@ public class SQLite {
         String url = "jdbc:sqlite:Database.db";
 
         // SQL statement for creating a new table
-        String sql0 = """
+        String usersSQL = """
                 CREATE TABLE IF NOT EXISTS users
                 (
                     id         INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -15,7 +15,7 @@ public class SQLite {
                     user_type  INTEGER NOT NULL
                 );""";
 
-        String sql1 = """
+        String ticketsSQL = """
                 CREATE TABLE IF NOT EXISTS tickets
                 (
                     id              INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -32,15 +32,10 @@ public class SQLite {
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement()) {
             // create a new table
-            stmt.execute(sql0);
-            stmt.execute(sql1);
+            stmt.execute(usersSQL);
+            stmt.execute(ticketsSQL);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        buildTables();
-
     }
 }

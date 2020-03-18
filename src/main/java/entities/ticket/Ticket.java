@@ -8,17 +8,17 @@ public class Ticket {
     private String address;
     private Date submissionDate;
     private String description;
-    private PRIORITY priority;
-    private STATUS status;
+    private Priority priority;
+    private Status status;
     private User customer;
     private User dispatcher;
     private User contractor;
 
-    public void setPriority(PRIORITY priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
-    public void setStatus(STATUS status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -35,7 +35,7 @@ public class Ticket {
         this.description = description;
         this.customer = customer;
         this.submissionDate = new Date();
-        this.priority = PRIORITY.LOW;
-        this.status = STATUS.ASSIGNED;
+        this.priority = null;
+        this.status = Status.AWAITING;
     }
 }

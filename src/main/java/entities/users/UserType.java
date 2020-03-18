@@ -1,6 +1,6 @@
 package entities.users;
 
-public enum  USER_TYPE {
+public enum UserType {
     CUSTOMER,
     DISPATCHER,
     CONTRACTOR

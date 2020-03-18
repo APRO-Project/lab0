@@ -1,6 +1,6 @@
 package entities.ticket;
 
-public enum PRIORITY {
+public enum Priority {
     LOW,
     MEDIUM,
     HIGH

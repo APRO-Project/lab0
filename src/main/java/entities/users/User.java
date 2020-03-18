@@ -5,9 +5,9 @@ public class User {
     private String lastName;
     private long ID;
     private String userName;
-    private USER_TYPE userType;
+    private UserType userType;
 
-    public User(String firstName, String lastName, long ID, String userName, USER_TYPE userType) {
+    public User(String firstName, String lastName, long ID, String userName, UserType userType) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.ID = ID;
@@ -31,9 +31,7 @@ public class User {
         return userName;
     }
 
-    public USER_TYPE getUserType() {
+    public UserType getUserType() {
         return userType;
     }
-
-
 }

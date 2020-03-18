@@ -1,6 +1,6 @@
 package entities.ticket;
 
-public enum STATUS {
+public enum Status {
     AWAITING,
     ASSIGNED,
     COMPLETED

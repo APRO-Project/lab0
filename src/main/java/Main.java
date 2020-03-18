@@ -5,6 +5,7 @@ public class Main {
         String url = "jdbc:sqlite:Database.db";
         try {
             Connection databaseConnection = DriverManager.getConnection(url);
+            SQLite.buildTables(databaseConnection);
         } catch (SQLException e) {
             e.printStackTrace();
         }

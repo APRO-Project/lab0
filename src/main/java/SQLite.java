@@ -5,35 +5,29 @@ public class SQLite {
         String url = "jdbc:sqlite:Database.db";
 
         // SQL statement for creating a new table
-        String sql0 = "create table IF NOT EXISTS users\n" +
-                "(\n" +
-                "    id         INTEGER not null\n" +
-                "        primary key autoincrement\n" +
-                "        unique,\n" +
-                "    first_name TEXT    not null,\n" +
-                "    last_name  TEXT    not null,\n" +
-                "    user_name  TEXT    not null\n" +
-                "        unique,\n" +
-                "    user_type  INTEGER not null\n" +
-                ");";
+        String sql0 = """
+                CREATE TABLE IF NOT EXISTS users
+                (
+                    id         INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+                    first_name TEXT    NOT NULL,
+                    last_name  TEXT    NOT NULL,
+                    user_name  TEXT    NOT NULL UNIQUE,
+                    user_type  INTEGER NOT NULL
+                );""";
 
-        String sql1 = "create table IF NOT EXISTS tickets\n" +
-                "(\n" +
-                "    id              INTEGER not null\n" +
-                "        primary key autoincrement\n" +
-                "        unique,\n" +
-                "    address         TEXT    not null,\n" +
-                "    submission_date TEXT    not null,\n" +
-                "    description     TEXT    not null,\n" +
-                "    priority        INTEGER,\n" +
-                "    status          INTEGER not null,\n" +
-                "    customer        INTEGER not null\n" +
-                "        references users,\n" +
-                "    dispatcher      INTEGER\n" +
-                "        references users,\n" +
-                "    contractor      INTEGER\n" +
-                "        references users\n" +
-                ");";
+        String sql1 = """
+                CREATE TABLE IF NOT EXISTS tickets
+                (
+                    id              INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+                    address         TEXT    NOT NULL,
+                    submission_date TEXT    NOT NULL,
+                    description     TEXT    NOT NULL,
+                    priority        INTEGER,
+                    status          INTEGER NOT NULL,
+                    customer        INTEGER NOT NULL REFERENCES users,
+                    dispatcher      INTEGER REFERENCES users,
+                    contractor      INTEGER REFERENCES users
+                );""";
 
         try (Connection conn = DriverManager.getConnection(url);
              Statement stmt = conn.createStatement()) {

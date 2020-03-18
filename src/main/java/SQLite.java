@@ -1,8 +1,7 @@
 import java.sql.*;
 
 public class SQLite {
-    private static void buildTables(){
-        String url = "jdbc:sqlite:Database.db";
+    public static void buildTables(Connection connection){
 
         // SQL statement for creating a new table
         String usersSQL = """
@@ -29,8 +28,7 @@ public class SQLite {
                     contractor      INTEGER REFERENCES users
                 );""";
 
-        try (Connection conn = DriverManager.getConnection(url);
-             Statement stmt = conn.createStatement()) {
+        try (Statement stmt = connection.createStatement()) {
             // create a new table
             stmt.execute(usersSQL);
             stmt.execute(ticketsSQL);

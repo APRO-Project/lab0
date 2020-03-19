@@ -1,5 +1,8 @@
 package entities.users;
 
+/**
+ * Class holding User data.
+ */
 public class User {
     private final String firstName;
     private final String lastName;

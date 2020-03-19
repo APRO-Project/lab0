@@ -10,9 +10,9 @@ public class Ticket {
     private String description;
     private Priority priority;
     private Status status;
-    private User customer;
-    private User dispatcher;
-    private User contractor;
+    private int customer;
+    private int dispatcher;
+    private int contractor;
 
     public void setPriority(Priority priority) {
         this.priority = priority;
@@ -22,15 +22,15 @@ public class Ticket {
         this.status = status;
     }
 
-    public void setDispatcher(User dispatcher) {
+    public void setDispatcher(int dispatcher) {
         this.dispatcher = dispatcher;
     }
 
-    public void setContractor(User contractor) {
+    public void setContractor(int contractor) {
         this.contractor = contractor;
     }
 
-    public Ticket(String address, String description, User customer) {
+    public Ticket(String address, String description, int customer) {
         this.address = address;
         this.description = description;
         this.customer = customer;

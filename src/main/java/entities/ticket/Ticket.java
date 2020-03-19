@@ -38,4 +38,36 @@ public class Ticket {
         this.priority = null;
         this.status = Status.AWAITING;
     }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Date getSubmissionDate() {
+        return submissionDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public int getCustomer() {
+        return customer;
+    }
+
+    public int getDispatcher() {
+        return dispatcher;
+    }
+
+    public int getContractor() {
+        return contractor;
+    }
 }

@@ -46,7 +46,11 @@ public class System {
     }
 
     public Ticket getTicketById(int id) {
-        return ticketList.get(id);
+        try {
+            return ticketList.get(id);
+        }catch (IndexOutOfBoundsException e){
+            return null;
+        }
     }
 
     public List<Ticket> getTicketsSortByPriority() {
@@ -96,7 +100,11 @@ public class System {
     }
 
     public User getUserById(int id) {
-        return userList.get(id);
+        try {
+            return userList.get(id);
+        } catch (IndexOutOfBoundsException e){
+            return null;
+        }
     }
 
     public List<User> getAllUsers() {

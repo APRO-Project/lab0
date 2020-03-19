@@ -9,6 +9,9 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Main in memory data class handling all entity manipulations
+ */
 public class System {
     private final List<Ticket> ticketList = new ArrayList<>();
     private final List<User> userList = new ArrayList<>();
@@ -18,6 +21,14 @@ public class System {
         return ticketList.size() - 1;
     }
 
+    /**
+     * Assigns ticket by a dispatcher to a contractor given the priority
+     *
+     * @param id Id of the ticket to alter
+     * @param dispatcherId Id of the dispatcher handling the ticket
+     * @param contractorId Id of the contractor that the ticket has been assigned to
+     * @param priority Priority o the ticket
+     */
     public void assignTicket(int id, int dispatcherId, int contractorId, Priority priority) {
         User dispatcher = getUserById(dispatcherId);
         User contractor = getUserById(contractorId);
@@ -35,15 +46,31 @@ public class System {
         this.ticketList.set(id, ticket);
     }
 
+    /**
+     * Marks the ticket as completed
+     *
+     * @param id Id o the ticket
+     */
     public void completeTicket(int id) {
         getTicketById(id).setStatus(Status.COMPLETED);
     }
 
+    /**
+     * Inserts a new {@link User} to the data set
+     * @param user User to insert
+     * @return id of the inserted User
+     */
     public int createUser(User user) {
         this.userList.add(user);
         return userList.size() - 1;
     }
 
+    /**
+     * Updates the {@link User}
+     * @param id id of the User to update
+     * @param user User to update
+     * @return true if the user has been updated
+     */
     public boolean updateUser(int id, User user) {
         try {
             this.userList.set(id, user);

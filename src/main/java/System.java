@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class System {
-    private List<Ticket> ticketList = new ArrayList<>();
-    private List<User> userList = new ArrayList<>();
+    private final List<Ticket> ticketList = new ArrayList<>();
+    private final List<User> userList = new ArrayList<>();
 
     public int insertTicket(Ticket ticket) {
         this.ticketList.add(ticket);

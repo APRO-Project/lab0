@@ -1,9 +1,9 @@
 package entities.users;
 
 public class User {
-    private String firstName;
-    private String lastName;
-    private UserType userType;
+    private final String firstName;
+    private final String lastName;
+    private final UserType userType;
 
     public User(String firstName, String lastName, UserType userType) {
         this.firstName = firstName;

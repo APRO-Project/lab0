@@ -4,6 +4,9 @@ import entities.users.User;
 
 import java.util.Date;
 
+/**
+ * Class holding ticket data, users are represented by ids.
+ */
 public class Ticket {
     private String address;
     private Date submissionDate;

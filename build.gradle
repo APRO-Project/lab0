@@ -6,10 +6,10 @@ plugins {
 group 'com.cyberbot'
 version '1.0.0'
 
-//noinspection GroovyUnusedAssignment
-sourceCompatibility = 1.8
+sourceCompatibility = 13
 
 test {
+    jvmArgs '--enable-preview'
     useJUnitPlatform()
 }
 
@@ -25,9 +25,13 @@ dependencies {
     compile group:'org.xerial', name:'sqlite-jdbc', version:'3.8.11.2'
 }
 
+compileJava {
+    options.compilerArgs += ["--enable-preview"]
+}
+
 compileKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "13"
 }
 compileTestKotlin {
-    kotlinOptions.jvmTarget = "1.8"
+    kotlinOptions.jvmTarget = "13"
 }

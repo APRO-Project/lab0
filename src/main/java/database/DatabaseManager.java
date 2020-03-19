@@ -1,25 +1,28 @@
+package database;
+
 import java.sql.*;
+import java.text.SimpleDateFormat;
 
-public class SQLite {
+public class DatabaseManager {
+    public static final SimpleDateFormat DATE_FORMAT =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     public static void buildTables(Connection connection){
-
-        // SQL statement for creating a new table
-        String usersSQL = """
+        String usersSql = """
                 CREATE TABLE IF NOT EXISTS users
                 (
                     id         INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
                     first_name TEXT    NOT NULL,
                     last_name  TEXT    NOT NULL,
-                    user_name  TEXT    NOT NULL UNIQUE,
+                    username  TEXT    NOT NULL UNIQUE,
                     user_type  INTEGER NOT NULL
                 );""";
 
-        String ticketsSQL = """
+        String ticketsSql = """
                 CREATE TABLE IF NOT EXISTS tickets
                 (
                     id              INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
                     address         TEXT    NOT NULL,
-                    submission_date TEXT    NOT NULL,
+                    submission_date TEXT    NOT NULL DEFAULT CURRENT_TIMESTAMP,
                     description     TEXT    NOT NULL,
                     priority        INTEGER,
                     status          INTEGER NOT NULL,
@@ -29,9 +32,8 @@ public class SQLite {
                 );""";
 
         try (Statement stmt = connection.createStatement()) {
-            // create a new table
-            stmt.execute(usersSQL);
-            stmt.execute(ticketsSQL);
+            stmt.execute(usersSql);
+            stmt.execute(ticketsSql);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

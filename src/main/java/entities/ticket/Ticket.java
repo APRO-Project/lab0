@@ -1,16 +1,14 @@
 package entities.ticket;
 
-import entities.users.User;
-
 import java.util.Date;
 
 public class Ticket {
-    private String address;
-    private Date submissionDate;
-    private String description;
+    private final String address;
+    private final Date submissionDate;
+    private final String description;
     private Priority priority;
     private Status status;
-    private int customer;
+    private final int customer;
     private int dispatcher;
     private int contractor;
 

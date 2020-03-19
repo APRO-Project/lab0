@@ -1,8 +1,10 @@
+import entities.ticket.Priority;
+import entities.ticket.Status;
 import entities.ticket.Ticket;
 import entities.users.User;
+import entities.users.UserType;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,14 +18,25 @@ public class System {
         return ticketList.size() - 1;
     }
 
-    public boolean updateTicket(int id, Ticket ticket) {
-        try {
-            this.ticketList.set(id, ticket);
-            return true;
+    public void assignTicket(int id, int dispatcherId, int contractorId, Priority priority) {
+        User dispatcher = getUserById(dispatcherId);
+        User contractor = getUserById(contractorId);
+
+        if(dispatcher.getUserType() != UserType.DISPATCHER || contractor.getUserType() != UserType.CONTRACTOR) {
+            throw new IllegalArgumentException("Wrong user types");
         }
-        catch (IndexOutOfBoundsException e){
-            return false;
-        }
+
+        Ticket ticket = this.getTicketById(id);
+        ticket.setStatus(Status.ASSIGNED);
+        ticket.setDispatcher(dispatcherId);
+        ticket.setContractor(contractorId);
+        ticket.setPriority(priority);
+
+        this.ticketList.set(id, ticket);
+    }
+
+    public void completeTicket(int id) {
+        getTicketById(id).setStatus(Status.COMPLETED);
     }
 
     public int createUser(User user) {
@@ -61,10 +74,9 @@ public class System {
         Comparator<Ticket> comparator = !reverseOrder ?
                 Comparator.comparing(Ticket::getPriority) :
                 Comparator.comparing(Ticket::getPriority).reversed();
-        List<Ticket> sortedTickets = ticketList.stream()
+        return ticketList.stream()
                     .sorted(comparator)
                     .collect(Collectors.toList());
-        return sortedTickets;
     }
 
     public List<Ticket> getTicketsSortByLocation() {
@@ -75,10 +87,9 @@ public class System {
         Comparator<Ticket> comparator = !reverseOrder ?
                 Comparator.comparing(Ticket::getAddress) :
                 Comparator.comparing(Ticket::getAddress).reversed();
-        List<Ticket> sortedTickets = ticketList.stream()
+        return ticketList.stream()
                 .sorted(comparator)
                 .collect(Collectors.toList());
-        return sortedTickets;
     }
 
     public List<Ticket> getTicketsForConsumer(int userId) {

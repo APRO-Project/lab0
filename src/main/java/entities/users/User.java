@@ -5,7 +5,7 @@ public class User {
     private String lastName;
     private UserType userType;
 
-    public User(String firstName, String lastName, long ID, String userName, UserType userType) {
+    public User(String firstName, String lastName, UserType userType) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userType = userType;
